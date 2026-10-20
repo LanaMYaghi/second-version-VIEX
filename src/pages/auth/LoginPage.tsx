@@ -27,6 +27,7 @@ const LoginPage = () => {
         linkTo="/register"
         textFooter="Don't have an account?"
         textLink="Sign up"
+        isAuth={true}
       />
      
     </div>

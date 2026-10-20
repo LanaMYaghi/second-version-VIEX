@@ -36,6 +36,7 @@ const RegisterPage = () => {
         linkTo="/login"
         textFooter="Already have an account?"
         textLink="Log in"
+        isAuth={true}
       />
      
     </div>
