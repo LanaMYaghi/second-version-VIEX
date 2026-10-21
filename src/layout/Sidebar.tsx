@@ -15,7 +15,7 @@ const active =
   "after:rounded-tr-full after:shadow-[5px_-5px_0_5px_#fff]";
 
 export default function Sidebar({
-  brand = "LMC",
+  brand = "VIEX",
   items = NAV_ITEMS,
   open = false,
   onClose,
