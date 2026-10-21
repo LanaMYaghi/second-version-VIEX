@@ -94,6 +94,7 @@ function QuizBuilderPage() {
   }));
 
   const tableHeaders = [
+    { key: "id", label: "ID" },
     { key: "index", label: "#" },
     { key: "question", label: "Question" },
     { key: "answersView", label: "Answers" },

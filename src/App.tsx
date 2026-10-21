@@ -5,7 +5,6 @@ import {
 } from "react-router-dom";
 
 import LoginPage from "./pages/auth/LoginPage";
-import RegisterPage from "./pages/auth/RegisterPage";
 
 import TeachersPage from "./pages/TeachersPage";
 import CoursesPage from "./pages/CoursesPage";
@@ -16,12 +15,11 @@ import StudentQuizzesPage from "./pages/quiz/StudentQuizzesPage";
 import TakeQuizPage from "./pages/quiz/TakeQuizPage";
 import QuizResultsPage from "./pages/quiz/QuizResultsPage";
 import EmployeesPage from "./pages/EmployeesPage";
-import RolesPage from "./pages/RolesPage"; // استيراد صفحة الأدوار الجديدة
+import RolesPage from "./pages/RolesPage";
 import PaymentsPage from "./pages/payment/PaymentsPage.js";
 
 import AppLayout from "./layout/AppLayout";
 import RequireRole from "./guards/RequireRole";
-import DevToolbar from "./components/DevToolbar";
 import { getRole, homeFor } from "./utils/permissions.js";
 
 // "/" بتوجّه حسب حالة المستخدم
@@ -38,16 +36,11 @@ const NotFound = () => (
 
 const router = createBrowserRouter([
   { path: "/", element: <HomeRedirect /> },
-<<<<<<< HEAD
-  // صفحات المصادقة بدون Layout
-=======
-  
-  // صفحات بدون Layout
->>>>>>> 4e38a20ef26c14eb8d67b112056cb3f5dcd7590b
-  { path: "/login", element: <LoginPage /> },
-  { path: "/register", element: <RegisterPage /> },
 
-  // كل الصفحات الأساسية تحت الـ Layout (sidebar + navbar)
+  // صفحة تسجيل الدخول الوحيدة المتاحة للعامة بدون Layout
+  { path: "/login", element: <LoginPage /> },
+
+  // كل الصفحات الأساسية تحت الـ Layout (sidebar + navbar) وتحتاج تسجيل دخول
   {
     element: <AppLayout />,
     children: [
@@ -61,7 +54,7 @@ const router = createBrowserRouter([
           { path: "/quizzes/:quizId/results", element: <QuizResultsPage /> },
         ],
       },
-      // خاصة بالأدمن والسكرتير
+      // خاصة بالأدمن والسكرتير (إدارة الطلاب، الأساتذة، والمدفوعات)
       {
         element: <RequireRole roles={["admin", "secretary"]} />,
         children: [
@@ -70,15 +63,12 @@ const router = createBrowserRouter([
           { path: "/payments", element: <PaymentsPage /> },
         ],
       },
-      // خاصة بالأدمن حصراً (تم إضافة Employees و Roles هنا)
+      // خاصة بالأدمن حصراً
       {
         element: <RequireRole roles={["admin"]} />,
         children: [
           { path: "/employees", element: <EmployeesPage /> },
-<<<<<<< HEAD
           { path: "/roles", element: <RolesPage /> },
-=======
->>>>>>> 4e38a20ef26c14eb8d67b112056cb3f5dcd7590b
         ],
       },
       // خاصة بالطلاب
@@ -98,10 +88,7 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <>
-      <RouterProvider router={router} />
-      <DevToolbar />
-    </>
+    <RouterProvider router={router} />
   );
 }
 

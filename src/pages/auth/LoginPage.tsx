@@ -7,25 +7,29 @@ const LoginPage = () => {
   const loginFields = getLoginFormFields();
   const navigate = useNavigate();
 
-  const handleLoginSubmit = async (formValues) => {
+ const handleLoginSubmit = async (formValues) => {
     try {
-      const result = await loginUser(formValues);
-      // localStorage.setItem("token", result.token);
-      // localStorage.setItem("userRole", result.user.role);
-      // localStorage.setItem("userId", result.user.id);
-      // localStorage.setItem("userName", result.user.fullName ?? "");
-      //for dev
-      localStorage.setItem("token", "dev-token");
-      localStorage.setItem("userRole", "teacher"); // أو admin / secretary
-      localStorage.setItem("userId", "1"); // لازم يساوي teacherId للكورس
+      const response = await loginUser(formValues);
+      
+      // البيانات تأتي داخل response.data حسب الـ Controller لديك
+      const { user, roles, permissions, accessToken } = response.data;
+
+      // تخزين التوكن والمعلومات في الـ localStorage
+      localStorage.setItem("token", accessToken);
+      localStorage.setItem("userRole", roles[0] || "student"); // أول دور للمستخدم
+      localStorage.setItem("userId", user.id);
+      localStorage.setItem("userName", user.full_name ?? "");
+      localStorage.setItem("userPermissions", JSON.stringify(permissions)); // تخزين الصلاحيات إن أردتِ استخدامها لاحقاً
 
       navigate("/courses", { replace: true });
 
-      console.log("Login Successful:", result);
+      console.log("Login Successful:", response);
       alert("تم تسجيل الدخول بنجاح!");
     } catch (error) {
       console.error("Login Failed:", error);
-      alert("البريد أو كلمة المرور غير صحيحة!");
+      // عرض رسالة الخطأ القادمة من الباك إند إن وجدت
+      const errorMsg = error.message || "البريد أو كلمة المرور غير صحيحة!";
+      alert(errorMsg);
     }
   };
 

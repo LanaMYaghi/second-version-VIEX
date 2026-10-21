@@ -1,7 +1,7 @@
 // src/services/studentApi.js
 import axios from 'axios';
 
-const API_URL = 'https://api.example.com/api/v1/students';
+const API_URL = 'http://localhost:4000/api/v1/students';
 
 // 1. إضافة طالب جديد
 export const createStudentApi = async (studentData) => {

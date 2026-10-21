@@ -91,12 +91,7 @@ export const getStudentFormFields = () => [
   },
   {
     inputs: [
-      {
-        label: "Student ID",
-        type: "text",
-        placeholder: "Enter student unique number",
-        name: "studentId",
-      },
+     
       { 
         // تم تعديل الـ name ليطابق الـ backend (birthday)
         label: "Date of Birth", 
@@ -388,7 +383,7 @@ export const getRoleFormFields = () => [
     className: "bg-[#3A5B22] text-white hover:bg-black transition-colors",
   },
 ];
-//user-permissions
+//user-permiss
 export const getUserPermissionFormFields = (usersList = [], permissionsList = []) => [
   {
     type: "select",

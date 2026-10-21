@@ -119,6 +119,7 @@ function CoursesPage() {
   }
 
   const tableHeaders = [
+    { key: "id", label: "ID" },
     { key: "title", label: "Course Title" },
     { key: "level", label: "Level" },
     { key: "price", label: "Price ($)" },

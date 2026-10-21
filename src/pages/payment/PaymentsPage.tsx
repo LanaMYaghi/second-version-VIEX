@@ -307,6 +307,7 @@ export default function PaymentsPage() {
   });
 
   const tableHeaders = [
+    { key: "id", label: "ID" },
     { key: "number_des", label: "Receipt No." },
     { key: "studentName", label: "Student" },
     { key: "courseTitle", label: "Course" },

@@ -1,7 +1,7 @@
 // src/services/teacherApi.js
 import axios from 'axios';
 
-const API_URL = 'https://api.example.com/api/v1/teachers';
+const API_URL = 'http://localhost:4000/api/v1/teachers';
 
 // 1. إضافة أستاذ بواسطة السكرتيرة
 export const addTeacherApi = async (teacherData) => {

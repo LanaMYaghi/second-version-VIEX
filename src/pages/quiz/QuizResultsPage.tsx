@@ -73,6 +73,7 @@ function QuizResultsPage() {
   }, [rows, data]);
 
   const tableHeaders = [
+    { key: "id", label: "ID" },
     { key: "rank", label: "#" },
     { key: "studentName", label: "Student" },
     { key: "markText", label: "Mark" },

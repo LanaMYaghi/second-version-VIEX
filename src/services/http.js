@@ -1,7 +1,4 @@
 // src/services/http.js
-import { mockRequest } from "./mockServer.js";
-
-export const USE_MOCK = true; // غيّريها لـ false لما يجهز الـ backend
 const BASE_URL = "http://localhost:3000/api"; // غيّريه لعنوان الـ backend تبعك
 
 // الطلب الحقيقي للسيرفر

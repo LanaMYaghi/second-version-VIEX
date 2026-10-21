@@ -32,6 +32,7 @@ function StudentQuizzesPage() {
   }));
 
   const tableHeaders = [
+    { key: "id", label: "ID" },
     { key: "title", label: "Quiz Title" },
     { key: "questionsCount", label: "Questions" },
     { key: "resultBadge", label: "Result" },

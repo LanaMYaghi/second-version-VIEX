@@ -39,6 +39,7 @@ function RolesPage() {
   };
 
   const tableHeaders = [
+    { key: "id", label: "ID" },
     { key: 'name', label: 'Role Name' },
     { key: 'description', label: 'Description' },
     {

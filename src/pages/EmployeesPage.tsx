@@ -107,6 +107,7 @@ function EmployeesPage() {
     });
 
     const tableHeaders = [
+        { key: "id", label: "ID" },
         { key: 'fullName', label: 'Full Name' },
         { key: 'email', label: 'Email' },
         { key: 'phone', label: 'Phone' },

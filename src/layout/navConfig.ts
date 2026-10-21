@@ -1,5 +1,11 @@
 // src/layout/navConfig.js
-import { BookOpen, GraduationCap, Users, ClipboardList, CreditCard } from "lucide-react";
+import {
+  BookOpen,
+  GraduationCap,
+  Users,
+  ClipboardList,
+  CreditCard,
+} from "lucide-react";
 
 export const NAV_ITEMS = [
   {
@@ -20,14 +26,7 @@ export const NAV_ITEMS = [
     icon: Users,
     roles: ["admin", "secretary"],
   },
-<<<<<<< HEAD
-
-   {
-
-
-=======
   {
->>>>>>> 4e38a20ef26c14eb8d67b112056cb3f5dcd7590b
     to: "/employees",
     label: "Employees",
     icon: Users,

@@ -3,8 +3,8 @@ import { Fragment } from "react";
 const CustomTable = ({
   headers = [],
   data = [],
-  expandedRowId = null, // جديد: id الصف المفتوح
-  renderExpanded = null, // جديد: (row) => JSX يظهر تحت الصف
+  expandedRowId = null,
+  renderExpanded = null,
 }) => {
   return (
     <div className="w-full overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
@@ -54,7 +54,11 @@ const CustomTable = ({
                               </button>
                             ))}
                           </div>
+                        ) : header.key === "id" || header.key === "counter" ? (
+                          /* التعديل هنا: إذا كان الـ key هو id أو counter، اعرض رقم الـ row التسلسلي بداً من الـ id الحقيقي */
+                          rowIndex + 1
                         ) : (
+                          /* الحالات العادية الأخرى */
                           row[header.key]
                         )}
                       </td>

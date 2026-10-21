@@ -135,6 +135,7 @@ function CourseQuizzesPage() {
   };
 
   const tableHeaders = [
+    { key: "id", label: "ID" },
     { key: "title", label: "Quiz Title" },
     { key: "questionsCount", label: "Questions" },
     { key: "submissionsCount", label: "Submitted" }, // جديد

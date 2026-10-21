@@ -14,19 +14,7 @@ function StudentsPage() {
   // جلب الرول الحقيقي للمستخدم (افتراضياً secretary إذا لم يتم تسجيل الدخول)
   const currentUserRole = localStorage.getItem("userRole") || "secretary";
 
-  const [students, setStudents] = useState([
-    {
-      id: 1,
-      fullName: "Ahmad Omar",
-      email: "ahmad@example.com",
-      fatherPhone: "+963911223344",
-      studentId: "ST-2026-001",
-      dateOfBirth: "2010-05-12",
-      gender: "Male",
-      nationality: "Syrian",
-      status: "active",
-    },
-  ]);
+  const [students, setStudents] = useState([]);
 
   usePageHeader("Students", `${students.length} students`);
 
@@ -140,7 +128,7 @@ function StudentsPage() {
   });
 
   const tableHeaders = [
-    { key: "studentId", label: "ID" },
+    { key: "id", label: "ID" },
     { key: "fullName", label: "Full Name" },
     { key: "email", label: "Email" },
     { key: "fatherPhone", label: "Father's Phone" },
