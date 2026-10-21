@@ -364,3 +364,59 @@ export const getEmployeeFormFields = () => [
     className: "bg-[#3A5B22] text-white hover:bg-black transition-colors"
   }
 ];
+//roles
+export const getRoleFormFields = () => [
+  {
+    inputs: [
+      {
+        label: "Role Name",
+        type: "text",
+        placeholder: "e.g. manager, supervisor",
+        name: "name",
+      },
+    ],
+  },
+  {
+    type: "textarea",
+    label: "Description",
+    name: "description",
+    placeholder: "Enter role description...",
+  },
+  {
+    type: "submit",
+    text: "Save Role",
+    className: "bg-[#3A5B22] text-white hover:bg-black transition-colors",
+  },
+];
+//user-permissions
+export const getUserPermissionFormFields = (usersList = [], permissionsList = []) => [
+  {
+    type: "select",
+    label: "Select User",
+    name: "userId",
+    placeholder: "Choose a user",
+    options: usersList.map((u) => ({ value: u._id, label: u.fullName || u.email })),
+  },
+  {
+    type: "select",
+    label: "Select Permission",
+    name: "permissionId",
+    placeholder: "Choose a permission",
+    options: permissionsList.map((p) => ({ value: p._id, label: p.name })),
+  },
+  {
+    type: "select",
+    label: "Effect",
+    name: "effect",
+    placeholder: "Select Effect",
+    options: [
+      { value: "allow", label: "Allow (سماح)" },
+      { value: "deny", label: "Deny (منع قاطع)" },
+    ],
+  },
+  {
+    type: "submit",
+    text: "Save Permission Override",
+    className: "bg-[#3A5B22] text-white hover:bg-black transition-colors",
+  },
+];
