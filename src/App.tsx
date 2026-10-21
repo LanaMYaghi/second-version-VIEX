@@ -36,6 +36,14 @@ const NotFound = () => (
 
 const router = createBrowserRouter([
   { path: "/", element: <HomeRedirect /> },
+<<<<<<< HEAD
+=======
+  // صفحات المصادقة بدون Layout
+  
+  // صفحات بدون Layout
+  { path: "/login", element: <LoginPage /> },
+  { path: "/register", element: <RegisterPage /> },
+>>>>>>> 601a4bc8f388312968ce50ef1bd427767b13f10d
 
   // صفحة تسجيل الدخول الوحيدة المتاحة للعامة بدون Layout
   { path: "/login", element: <LoginPage /> },
