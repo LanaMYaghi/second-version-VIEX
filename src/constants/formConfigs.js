@@ -81,10 +81,11 @@ export const getStudentFormFields = () => [
         name: "password",
       },
       {
+        // تم تعديل الـ name ليطابق الـ backend (father_number)
         label: "Father's Phone",
         type: "text",
         placeholder: "Enter father's phone number",
-        name: "fatherPhone",
+        name: "father_number",
       },
     ],
   },
@@ -96,7 +97,12 @@ export const getStudentFormFields = () => [
         placeholder: "Enter student unique number",
         name: "studentId",
       },
-      { label: "Date of Birth", type: "date", name: "dateOfBirth" },
+      { 
+        // تم تعديل الـ name ليطابق الـ backend (birthday)
+        label: "Date of Birth", 
+        type: "date", 
+        name: "birthday" 
+      },
     ],
   },
   {
@@ -185,10 +191,22 @@ export const getTeacherFormFields = () => [
         name: "specialization",
       },
       {
-        label: "Hourly Rate / Salary ($)",
+        // تم تعديل الـ name من hourlyRate إلى salary ليتطابق مع الـ Schema
+        label: "Salary ($)",
         type: "number",
-        placeholder: "e.g. 25",
-        name: "hourlyRate",
+        placeholder: "e.g. 500",
+        name: "salary",
+      },
+    ],
+  },
+  {
+    inputs: [
+      {
+        // تم إضافة هذا الحقل لأنه مطلوب (required) في الباك إند
+        label: "Certificate Image URL",
+        type: "text",
+        placeholder: "Enter certificate image link or path",
+        name: "certificateImage",
       },
     ],
   },
@@ -217,12 +235,22 @@ export const getCourseFormFields = (teachersList = []) => [
     name: "description",
     placeholder: "Enter brief description about the course...",
   },
+  // أضفنا حقل السعر (Price) لأنه موجود في الباك إند وكان ناقصاً بالفورم
+  {
+    inputs: [
+      {
+        label: "Price ($)",
+        type: "number",
+        placeholder: "e.g. 100",
+        name: "price",
+      },
+    ],
+  },
   {
     type: "select",
     label: "Select Teacher",
     name: "teacherId",
     placeholder: "Choose a teacher",
-    // الأستاذة
     options: teachersList.map((t) => ({ value: t.id, label: t.name })),
   },
   {
@@ -230,7 +258,6 @@ export const getCourseFormFields = (teachersList = []) => [
     label: "Language Level",
     name: "level",
     placeholder: "Choose level",
-
     options: [
       { value: "A1-1", label: "A1-1" },
       { value: "A1-2", label: "A1-2" },
@@ -243,10 +270,11 @@ export const getCourseFormFields = (teachersList = []) => [
   },
   {
     inputs: [
-      { label: "Start Date", type: "date", name: "startDate" },
-      { label: "End Date", type: "date", name: "endDate" },
-      { label: "Start Time", type: "time", name: "startTime" },
-      { label: "End Time", type: "time", name: "endTime" },
+      // تم تعديل الأسماء هنا لتطابق الباك إند (start_date, end_date, start_time, end_time)
+      { label: "Start Date", type: "date", name: "start_date" },
+      { label: "End Date", type: "date", name: "end_date" },
+      { label: "Start Time", type: "time", name: "start_time" },
+      { label: "End Time", type: "time", name: "end_time" },
     ],
   },
   {
@@ -257,8 +285,8 @@ export const getCourseFormFields = (teachersList = []) => [
       { value: "Sat", label: "Saturday" },
       { value: "Sun", label: "Sunday" },
       { value: "Mon", label: "Monday" },
-      { value: "Tue", label: "Tuseday" },
-      { value: "Wed", label: "wednesday" },
+      { value: "Tue", label: "Tuesday" },
+      { value: "Wed", label: "Wednesday" },
       { value: "Thu", label: "Thursday" },
     ],
   },
@@ -288,14 +316,14 @@ export const getQuizFormFields = () => [
 export const getEmployeeFormFields = () => [
   {
     inputs: [
-      { label: "Full Name", type: "text", placeholder: "Enter employee's full name", name: "fullName" },
+      { label: "Full Name", type: "text", placeholder: "Enter employee's full name", name: "full_name" },
       { label: "Email Address", type: "email", placeholder: "Enter email address", name: "email" }
     ]
   },
   {
     inputs: [
       { label: "Password", type: "password", placeholder: "Enter secure password", name: "password" },
-      { label: "Phone Number", type: "text", placeholder: "Enter phone number", name: "phone" }
+      { label: "Phone Number", type: "text", placeholder: "Enter phone number", name: "number_phone" }
     ]
   },
   {
@@ -307,6 +335,27 @@ export const getEmployeeFormFields = () => [
       { value: "Secretary", label: "Secretary" },
       { value: "Accountant", label: "Accountant" },
       { value: "HR", label: "HR Manager" }
+    ]
+  },
+  {
+    inputs: [
+      { label: "Nationality", type: "text", placeholder: "e.g. Syrian", name: "nationality" },
+      { label: "Salary", type: "number", placeholder: "Enter salary", name: "salary" }
+    ]
+  },
+  {
+    type: "select",
+    label: "Gender",
+    name: "gender",
+    placeholder: "Select Gender",
+    options: [
+      { value: "male", label: "Male" },
+      { value: "female", label: "Female" }
+    ]
+  },
+  {
+    inputs: [
+      { label: "Address", type: "text", placeholder: "Enter city/address", name: "address" }
     ]
   },
   {

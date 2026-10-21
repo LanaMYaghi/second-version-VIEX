@@ -21,7 +21,7 @@ export const NAV_ITEMS = [
     roles: ["admin", "secretary"],
   },
    {
-    to: "/emplyees",
+    to: "/employees",
     label: "Employees",
     icon: Users,
     roles: ["admin"],

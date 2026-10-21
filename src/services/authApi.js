@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 // استبدلي هذا المسار بمسار الـ API الخاص بكِ
-const API_URL = 'https://api.example.com/api/v1/auth';
+const API_URL = 'http://localhost:5000/api/v1/auth';
 
 // 1. دالة إنشاء حساب جديد (Register)
 export const registerUser = async (userData) => {

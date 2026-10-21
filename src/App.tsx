@@ -150,14 +150,14 @@ const router = createBrowserRouter([
         children: [
           { path: "/students", element: <StudentsPage /> },
           { path: "/teachers", element: <TeachersPage /> },
-          {path:"/employees ",element:<EmployeesPage/>}
+        
 
         ],
       },
       {
         element: <RequireRole roles={["admin"]} />,
         children: [
-          {path:"/employees ",element:<EmployeesPage/>}
+          {path:"/employees",element:<EmployeesPage/>}
 
         ],
       },
