@@ -20,11 +20,7 @@ export const NAV_ITEMS = [
     icon: Users,
     roles: ["admin", "secretary"],
   },
-<<<<<<< HEAD
-   {
-=======
   {
->>>>>>> 7b30cc9b208f78fb2f823dba01d03bc87a0c36ff
     to: "/employees",
     label: "Employees",
     icon: Users,

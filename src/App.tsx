@@ -131,7 +131,8 @@ const NotFound = () => (
 
 const router = createBrowserRouter([
   { path: "/", element: <HomeRedirect /> },
-  // بدون Layout
+  
+  // صفحات بدون Layout
   { path: "/login", element: <LoginPage /> },
   { path: "/register", element: <RegisterPage /> },
 
@@ -156,24 +157,14 @@ const router = createBrowserRouter([
         children: [
           { path: "/students", element: <StudentsPage /> },
           { path: "/teachers", element: <TeachersPage /> },
-<<<<<<< HEAD
-        
-
-=======
-          { path: "/payments", element: <PaymentsPage /> }
->>>>>>> 7b30cc9b208f78fb2f823dba01d03bc87a0c36ff
+          { path: "/payments", element: <PaymentsPage /> },
         ],
       },
       {
         element: <RequireRole roles={["admin"]} />,
-<<<<<<< HEAD
         children: [
-          {path:"/employees",element:<EmployeesPage/>}
-
+          { path: "/employees", element: <EmployeesPage /> },
         ],
-=======
-        children: [{ path: "/employees", element: <EmployeesPage /> }],
->>>>>>> 7b30cc9b208f78fb2f823dba01d03bc87a0c36ff
       },
       {
         element: <RequireRole roles={["student"]} />,
