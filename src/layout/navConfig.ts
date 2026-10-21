@@ -20,6 +20,12 @@ export const NAV_ITEMS = [
     icon: Users,
     roles: ["admin", "secretary"],
   },
+   {
+    to: "/emplyees",
+    label: "Employees",
+    icon: Users,
+    roles: ["admin"],
+  },
   {
     to: "/student/quizzes",
     label: "My Quizzes",

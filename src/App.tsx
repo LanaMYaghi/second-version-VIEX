@@ -111,7 +111,8 @@ import QuizResultsPage from "./pages/quiz/QuizResultsPage";
 import AppLayout from "./layout/AppLayout";
 import RequireRole from "./guards/RequireRole";
 import DevToolbar from "./components/DevToolbar";
-import { getRole, homeFor } from "./utils/permissions";
+import { getRole, homeFor } from "./utils/permissions.js";
+import EmployeesPage from "./pages/EmployeesPage";
 
 // "/" بتوجّه حسب حالة المستخدم
 function HomeRedirect() {
@@ -149,6 +150,15 @@ const router = createBrowserRouter([
         children: [
           { path: "/students", element: <StudentsPage /> },
           { path: "/teachers", element: <TeachersPage /> },
+          {path:"/employees ",element:<EmployeesPage/>}
+
+        ],
+      },
+      {
+        element: <RequireRole roles={["admin"]} />,
+        children: [
+          {path:"/employees ",element:<EmployeesPage/>}
+
         ],
       },
       {

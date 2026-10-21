@@ -283,3 +283,35 @@ export const getQuizFormFields = () => [
   },
   { type: "submit", text: "Create Quiz" },
 ];
+
+// فورم اضافة موظف 
+export const getEmployeeFormFields = () => [
+  {
+    inputs: [
+      { label: "Full Name", type: "text", placeholder: "Enter employee's full name", name: "fullName" },
+      { label: "Email Address", type: "email", placeholder: "Enter email address", name: "email" }
+    ]
+  },
+  {
+    inputs: [
+      { label: "Password", type: "password", placeholder: "Enter secure password", name: "password" },
+      { label: "Phone Number", type: "text", placeholder: "Enter phone number", name: "phone" }
+    ]
+  },
+  {
+    type: "select",
+    label: "Employee Role / Position",
+    name: "position",
+    placeholder: "Select Position",
+    options: [
+      { value: "Secretary", label: "Secretary" },
+      { value: "Accountant", label: "Accountant" },
+      { value: "HR", label: "HR Manager" }
+    ]
+  },
+  {
+    type: "submit",
+    text: "Add Employee",
+    className: "bg-[#3A5B22] text-white hover:bg-black transition-colors"
+  }
+];
