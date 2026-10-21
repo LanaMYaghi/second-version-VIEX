@@ -27,7 +27,6 @@
 //   // { path: "/login", element: <LoginPage /> },       // بدون Layout
 //   // { path: "/register", element: <RegisterPage /> },
 
-
 //   {
 //     path: "/course",
 
@@ -93,8 +92,11 @@
 
 // export default App;
 
-
-import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from "react-router-dom";
 
 import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
@@ -113,6 +115,7 @@ import RequireRole from "./guards/RequireRole";
 import DevToolbar from "./components/DevToolbar";
 import { getRole, homeFor } from "./utils/permissions.js";
 import EmployeesPage from "./pages/EmployeesPage";
+import PaymentsPage from "./pages/payment/PaymentsPage.js";
 
 // "/" بتوجّه حسب حالة المستخدم
 function HomeRedirect() {
@@ -140,7 +143,10 @@ const router = createBrowserRouter([
         element: <RequireRole roles={["admin", "secretary", "teacher"]} />,
         children: [
           { path: "/courses", element: <CoursesPage /> },
-          { path: "/courses/:courseId/quizzes", element: <CourseQuizzesPage /> },
+          {
+            path: "/courses/:courseId/quizzes",
+            element: <CourseQuizzesPage />,
+          },
           { path: "/quizzes/:quizId", element: <QuizBuilderPage /> },
           { path: "/quizzes/:quizId/results", element: <QuizResultsPage /> },
         ],
@@ -150,16 +156,12 @@ const router = createBrowserRouter([
         children: [
           { path: "/students", element: <StudentsPage /> },
           { path: "/teachers", element: <TeachersPage /> },
-          {path:"/employees ",element:<EmployeesPage/>}
-
+          { path: "/payments", element: <PaymentsPage /> }
         ],
       },
       {
         element: <RequireRole roles={["admin"]} />,
-        children: [
-          {path:"/employees ",element:<EmployeesPage/>}
-
-        ],
+        children: [{ path: "/employees", element: <EmployeesPage /> }],
       },
       {
         element: <RequireRole roles={["student"]} />,

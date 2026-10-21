@@ -1,5 +1,5 @@
 // src/layout/navConfig.js
-import { BookOpen, GraduationCap, Users, ClipboardList } from "lucide-react";
+import { BookOpen, GraduationCap, Users, ClipboardList, CreditCard } from "lucide-react";
 
 export const NAV_ITEMS = [
   {
@@ -20,8 +20,8 @@ export const NAV_ITEMS = [
     icon: Users,
     roles: ["admin", "secretary"],
   },
-   {
-    to: "/emplyees",
+  {
+    to: "/employees",
     label: "Employees",
     icon: Users,
     roles: ["admin"],
@@ -31,6 +31,12 @@ export const NAV_ITEMS = [
     label: "My Quizzes",
     icon: ClipboardList,
     roles: ["student"],
+  },
+  {
+    to: "/payments",
+    label: "Payments",
+    icon: CreditCard,
+    roles: ["admin", "secretary"],
   },
 ];
 
