@@ -38,7 +38,12 @@ const NotFound = () => (
 
 const router = createBrowserRouter([
   { path: "/", element: <HomeRedirect /> },
+<<<<<<< HEAD
   // صفحات المصادقة بدون Layout
+=======
+  
+  // صفحات بدون Layout
+>>>>>>> 4e38a20ef26c14eb8d67b112056cb3f5dcd7590b
   { path: "/login", element: <LoginPage /> },
   { path: "/register", element: <RegisterPage /> },
 
@@ -70,7 +75,10 @@ const router = createBrowserRouter([
         element: <RequireRole roles={["admin"]} />,
         children: [
           { path: "/employees", element: <EmployeesPage /> },
+<<<<<<< HEAD
           { path: "/roles", element: <RolesPage /> },
+=======
+>>>>>>> 4e38a20ef26c14eb8d67b112056cb3f5dcd7590b
         ],
       },
       // خاصة بالطلاب
