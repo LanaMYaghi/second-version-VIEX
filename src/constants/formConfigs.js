@@ -55,25 +55,49 @@ export const getRegisterFormFields = () => [
 
 // 1. فورم إضافة طالب
 
-
 export const getStudentFormFields = () => [
   {
     inputs: [
-      { label: "Full Name", type: "text", placeholder: "Enter student's full name", name: "fullName" },
-      { label: "Email Address", type: "email", placeholder: "Enter email address", name: "email" }
-    ]
+      {
+        label: "Full Name",
+        type: "text",
+        placeholder: "Enter student's full name",
+        name: "fullName",
+      },
+      {
+        label: "Email Address",
+        type: "email",
+        placeholder: "Enter email address",
+        name: "email",
+      },
+    ],
   },
   {
     inputs: [
-      { label: "Password", type: "password", placeholder: "Enter secure password", name: "password" },
-      { label: "Father's Phone", type: "text", placeholder: "Enter father's phone number", name: "fatherPhone" }
-    ]
+      {
+        label: "Password",
+        type: "password",
+        placeholder: "Enter secure password",
+        name: "password",
+      },
+      {
+        label: "Father's Phone",
+        type: "text",
+        placeholder: "Enter father's phone number",
+        name: "fatherPhone",
+      },
+    ],
   },
   {
     inputs: [
-      { label: "Student ID", type: "text", placeholder: "Enter student unique number", name: "studentId" },
-      { label: "Date of Birth", type: "date", name: "dateOfBirth" }
-    ]
+      {
+        label: "Student ID",
+        type: "text",
+        placeholder: "Enter student unique number",
+        name: "studentId",
+      },
+      { label: "Date of Birth", type: "date", name: "dateOfBirth" },
+    ],
   },
   {
     type: "select",
@@ -82,19 +106,24 @@ export const getStudentFormFields = () => [
     placeholder: "Select Gender",
     options: [
       { value: "Male", label: "Male" },
-      { value: "Female", label: "Female" }
-    ]
+      { value: "Female", label: "Female" },
+    ],
   },
   {
     inputs: [
-      { label: "Nationality", type: "text", placeholder: "e.g. Syrian", name: "nationality" }
-    ]
+      {
+        label: "Nationality",
+        type: "text",
+        placeholder: "e.g. Syrian",
+        name: "nationality",
+      },
+    ],
   },
   {
     type: "submit",
     text: "Add Student",
-    className: "bg-[#3A5B22] text-white hover:bg-black transition-colors"
-  }
+    className: "bg-[#3A5B22] text-white hover:bg-black transition-colors",
+  },
 ];
 
 //فورم اضافة استاذ
@@ -238,4 +267,19 @@ export const getCourseFormFields = (teachersList = []) => [
     text: "Add Course",
     className: "bg-[#3A5B22] text-white hover:bg-black transition-colors",
   },
+];
+
+//quiz form
+export const getQuizFormFields = () => [
+  {
+    inputs: [
+      {
+        label: "Quiz Title",
+        type: "text",
+        placeholder: "e.g. Unit 1 Quiz",
+        name: "title",
+      },
+    ],
+  },
+  { type: "submit", text: "Create Quiz" },
 ];
