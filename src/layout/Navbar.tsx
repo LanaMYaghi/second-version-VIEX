@@ -2,11 +2,10 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Menu, ChevronDown, LogOut } from "lucide-react";
-import { getRole } from "../utils/permissions";
+import { logoutUser } from "../services/authApi";
 
 export default function Navbar({ title, subtitle, onMenuClick }) {
   const navigate = useNavigate();
-  const role = getRole();
   const name = localStorage.getItem("userName") || role;
 
   const [menuOpen, setMenuOpen] = useState(false);
@@ -22,10 +21,8 @@ export default function Navbar({ title, subtitle, onMenuClick }) {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-  const logout = () => {
-    ["token", "userRole", "userId", "userName"].forEach((k) =>
-      localStorage.removeItem(k)
-    );
+  const logout = async () => {
+    await logoutUser().catch(() => {}); // بيلغي الـ refresh token بالباك وبيمسح الجلسة كاملة
     navigate("/login", { replace: true });
   };
 

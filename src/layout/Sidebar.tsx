@@ -1,7 +1,6 @@
 // src/layout/Sidebar.jsx
 import { NavLink } from "react-router-dom";
 import { NAV_ITEMS, canSee } from "./navConfig";
-import { getRole } from "../utils/permissions";
 
 // العنصر الفعّال بيصير أبيض وبيلتحم مع المحتوى. before و after بيعملوا المنحنيات فوقه وتحته
 const base =
@@ -20,8 +19,7 @@ export default function Sidebar({
   open = false,
   onClose,
 }) {
-  const role = getRole();
-  const visibleItems = items.filter((item) => canSee(item, role));
+  const visibleItems = items.filter(canSee);
 
   return (
     <aside

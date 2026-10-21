@@ -1,51 +1,41 @@
-// src/services/quizApi.js
-import { request } from "./http";
+import api from "./apiClient.js";
 
-export const fetchCourseQuizzes = (courseId) =>
-  request(`/courses/${courseId}/quizzes`);
-export const fetchQuiz = (quizId) => request(`/quizzes/${quizId}`); // مع questions و answers
+const base = (courseId) => `/courses/${courseId}/quizzes`;
 
-export const createQuiz = ({ title, courseId }) =>
-  request("/quizzes", {
-    method: "POST",
-    body: JSON.stringify({ title, courseId }),
-  });
+export const listQuizzesApi = async (courseId) =>
+  (await api.get(base(courseId))).data.data.quizzes;
 
-export const updateQuiz = (quizId, { title }) =>
-  request(`/quizzes/${quizId}`, {
-    method: "PUT",
-    body: JSON.stringify({ title }),
-  });
+export const getQuizApi = async (courseId, quizId) =>
+  (await api.get(`${base(courseId)}/${quizId}`)).data.data.quiz;
 
-export const deleteQuiz = (quizId) =>
-  request(`/quizzes/${quizId}`, { method: "DELETE" });
+export const createQuizApi = async (courseId, payload) =>
+  (await api.post(base(courseId), payload)).data;
 
-// data = { question: "...", answers: [{ option: "...", isCorrect: true }, ...] }
-export const addQuestion = (quizId, data) =>
-  request(`/quizzes/${quizId}/questions`, {
-    method: "POST",
-    body: JSON.stringify(data),
-  });
+export const updateQuizApi = async (courseId, quizId, payload) =>
+  (await api.patch(`${base(courseId)}/${quizId}`, payload)).data;
 
-export const updateQuestion = (quizId, questionId, data) =>
-  request(`/quizzes/${quizId}/questions/${questionId}`, {
-    method: "PUT",
-    body: JSON.stringify(data),
-  });
+export const deleteQuizApi = async (courseId, quizId) =>
+  (await api.delete(`${base(courseId)}/${quizId}`)).data;
 
-export const deleteQuestion = (quizId, questionId) =>
-  request(`/quizzes/${quizId}/questions/${questionId}`, { method: "DELETE" });
+export const addQuestionApi = async (courseId, quizId, payload) =>
+  (await api.post(`${base(courseId)}/${quizId}/questions`, payload)).data;
 
-// الطالب
-export const fetchStudentQuizzes = () => request("/student/quizzes");
-export const fetchQuizToTake = (quizId) => request(`/quizzes/${quizId}/take`);
+export const updateQuestionApi = async (courseId, quizId, questionId, payload) =>
+  (await api.patch(`${base(courseId)}/${quizId}/questions/${questionId}`, payload)).data;
 
-// answers = [{ questionId, answerId }]
-export const submitQuiz = (quizId, answers) =>
-  request(`/quizzes/${quizId}/submit`, {
-    method: "POST",
-    body: JSON.stringify({ answers }),
-  });
+export const deleteQuestionApi = async (courseId, quizId, questionId) =>
+  (await api.delete(`${base(courseId)}/${quizId}/questions/${questionId}`)).data;
 
-export const fetchQuizResults = (quizId) =>
-  request(`/quizzes/${quizId}/results`);
+// ===== جهة الطالب =====
+export const submitAttemptApi = async (quizId, answers) =>
+  (await api.post(`/quizzes/${quizId}/attempts`, { answers })).data.data;
+
+// بيرجّع null إذا ما في محاولة (404)
+export const getMyAttemptApi = async (quizId) => {
+  try {
+    return (await api.get(`/quizzes/${quizId}/attempts/me`)).data.data.attempt;
+  } catch (e) {
+    if (e.status === 404) return null;
+    throw e;
+  }
+};

@@ -1,103 +1,82 @@
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Navigate,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 
 import LoginPage from "./pages/auth/LoginPage";
-
-import TeachersPage from "./pages/TeachersPage";
-import CoursesPage from "./pages/CoursesPage";
 import StudentsPage from "./pages/StudentsPage";
+import TeachersPage from "./pages/TeachersPage";
+import EmployeesPage from "./pages/EmployeesPage";
+import RolesPage from "./pages/RolesPage";
+import CoursesPage from "./pages/CoursesPage";
 import CourseQuizzesPage from "./pages/quiz/CourseQuizzesPage";
 import QuizBuilderPage from "./pages/quiz/QuizBuilderPage";
 import StudentQuizzesPage from "./pages/quiz/StudentQuizzesPage";
 import TakeQuizPage from "./pages/quiz/TakeQuizPage";
-import QuizResultsPage from "./pages/quiz/QuizResultsPage";
-import EmployeesPage from "./pages/EmployeesPage";
-import RolesPage from "./pages/RolesPage";
-import PaymentsPage from "./pages/payment/PaymentsPage.js";
+import PaymentsPage from "./pages/payment/PaymentsPage";
 
 import AppLayout from "./layout/AppLayout";
-import RequireRole from "./guards/RequireRole";
-import { getRole, homeFor } from "./utils/permissions.js";
+import RequirePermission from "./guards/RequireRole";
+import { homeFor } from "./utils/permissions";
 
-// "/" بتوجّه حسب حالة المستخدم
 function HomeRedirect() {
   const token = localStorage.getItem("token");
-  return <Navigate to={token ? homeFor(getRole()) : "/login"} replace />;
+  return <Navigate to={token ? homeFor() : "/login"} replace />;
 }
 
 const NotFound = () => (
-  <div className="p-10 text-center text-red-500 font-bold">
-    عذراً، الصفحة غير موجودة (404)
-  </div>
+  <div className="p-10 text-center text-red-500 font-bold">Page not found (404)</div>
 );
 
+// الحماية حسب الصلاحية (نفس الأسماء اللي بالباك/seed) مو حسب اسم الدور
 const router = createBrowserRouter([
   { path: "/", element: <HomeRedirect /> },
-<<<<<<< HEAD
-=======
-  // صفحات المصادقة بدون Layout
-  
-  // صفحات بدون Layout
-  { path: "/login", element: <LoginPage /> },
-  { path: "/register", element: <RegisterPage /> },
->>>>>>> 601a4bc8f388312968ce50ef1bd427767b13f10d
-
-  // صفحة تسجيل الدخول الوحيدة المتاحة للعامة بدون Layout
   { path: "/login", element: <LoginPage /> },
 
-  // كل الصفحات الأساسية تحت الـ Layout (sidebar + navbar) وتحتاج تسجيل دخول
   {
     element: <AppLayout />,
     children: [
-      // المشتركة بين الأدمن والسكرتير والأستاذ
       {
-        element: <RequireRole roles={["admin", "secretary", "teacher"]} />,
+        element: <RequirePermission permissions={["courses.view"]} />,
+        children: [{ path: "/courses", element: <CoursesPage /> }],
+      },
+      {
+        element: <RequirePermission permissions={["quizzes.update", "quizzes.create"]} />,
         children: [
-          { path: "/courses", element: <CoursesPage /> },
           { path: "/courses/:courseId/quizzes", element: <CourseQuizzesPage /> },
-          { path: "/quizzes/:quizId", element: <QuizBuilderPage /> },
-          { path: "/quizzes/:quizId/results", element: <QuizResultsPage /> },
+          { path: "/courses/:courseId/quizzes/:quizId", element: <QuizBuilderPage /> },
         ],
       },
-      // خاصة بالأدمن والسكرتير (إدارة الطلاب، الأساتذة، والمدفوعات)
       {
-        element: <RequireRole roles={["admin", "secretary"]} />,
-        children: [
-          { path: "/students", element: <StudentsPage /> },
-          { path: "/teachers", element: <TeachersPage /> },
-          { path: "/payments", element: <PaymentsPage /> },
-        ],
+        element: <RequirePermission permissions={["students.read"]} />,
+        children: [{ path: "/students", element: <StudentsPage /> }],
       },
-      // خاصة بالأدمن حصراً
       {
-        element: <RequireRole roles={["admin"]} />,
-        children: [
-          { path: "/employees", element: <EmployeesPage /> },
-          { path: "/roles", element: <RolesPage /> },
-        ],
+        element: <RequirePermission permissions={["teachers.read"]} />,
+        children: [{ path: "/teachers", element: <TeachersPage /> }],
       },
-      // خاصة بالطلاب
       {
-        element: <RequireRole roles={["student"]} />,
+        element: <RequirePermission permissions={["employees.read"]} />,
+        children: [{ path: "/employees", element: <EmployeesPage /> }],
+      },
+      {
+        element: <RequirePermission permissions={["roles.read"]} />,
+        children: [{ path: "/roles", element: <RolesPage /> }],
+      },
+      {
+        element: <RequirePermission permissions={["invoices.read"]} />,
+        children: [{ path: "/payments", element: <PaymentsPage /> }],
+      },
+      {
+        element: <RequirePermission permissions={["quizzes.submit"]} />,
         children: [
           { path: "/student/quizzes", element: <StudentQuizzesPage /> },
-          { path: "/student/quizzes/:quizId", element: <TakeQuizPage /> },
+          { path: "/student/courses/:courseId/quizzes/:quizId", element: <TakeQuizPage /> },
         ],
       },
     ],
   },
 
-  // أي رابط غير موجود
   { path: "*", element: <NotFound /> },
 ]);
 
-function App() {
-  return (
-    <RouterProvider router={router} />
-  );
+export default function App() {
+  return <RouterProvider router={router} />;
 }
-
-export default App;

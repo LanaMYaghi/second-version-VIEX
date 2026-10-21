@@ -1,23 +1,26 @@
-// src/utils/permissions.js
-export const getRole = () => localStorage.getItem("userRole");
-export const getUserId = () => localStorage.getItem("userId");
+function read(key, fallback) {
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : fallback;
+  } catch {
+    return fallback;
+  }
+}
 
-// الجدول الوحيد اللي بيحدد مين بيعمل شو
-const PERMISSIONS = {
-  admin: ["quiz:view", "quiz:results"],
-  secretary: ["quiz:view", "quiz:results"],
-  teacher: [
-    "quiz:view",
-    "quiz:create",
-    "quiz:edit",
-    "quiz:delete",
-    "quiz:results",
-  ],
-  student: ["quiz:take"],
-};
+export const getRole = () => localStorage.getItem("userRole") || "";
 
-export const can = (permission) =>
-  PERMISSIONS[getRole()]?.includes(permission) ?? false;
+export const getPermissions = () => read("userPermissions", []);
 
-export const homeFor = (role) =>
-  role === "student" ? "/student/quizzes" : "/courses";
+// للشكل فقط (إخفاء/إظهار أزرار). الحماية الحقيقية بالباك.
+export const can = (permission) => getPermissions().includes(permission);
+
+export const canAny = (...permissions) => permissions.some(can);
+
+// الصفحة الأولى حسب الصلاحيات (مو حسب اسم الدور)
+export function homeFor() {
+  if (can("courses.view")) return can("quizzes.submit") && !can("courses.create") ? "/student/quizzes" : "/courses";
+  if (can("students.read")) return "/students";
+  if (can("invoices.read")) return "/payments";
+  if (can("roles.read")) return "/roles";
+  return "/login";
+}

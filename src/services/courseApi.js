@@ -1,16 +1,19 @@
+import api from "./apiClient.js";
 
-// src/services/courseApi.js
-import axios from 'axios';
+export const listCoursesApi = async () =>
+  (await api.get("/courses")).data.data.courses;
 
-const API_URL = 'http://localhost:4000/api/v1';
+export const createCourseApi = async (payload) =>
+  (await api.post("/courses", payload)).data;
 
-export const createCourseApi = async (courseData) => {
-  try {
-    const response = await axios.post(`${API_URL}/courses`, courseData);
-    return response.data;
-  } catch (error) {
-    console.warn('API Endpoint not ready (404 Not Found), switching to local mode.');
-    // إرجاع البيانات محلياً لتفادي توقف الصفحة
-    return { ...courseData, id: Date.now(), status: 'active' };
-  }
-};
+export const updateCourseApi = async (id, payload) =>
+  (await api.patch(`/courses/${id}`, payload)).data;
+
+export const deleteCourseApi = async (id) =>
+  (await api.delete(`/courses/${id}`)).data;
+
+export const enrollStudentApi = async (courseId, studentId) =>
+  (await api.post(`/courses/${courseId}/students/${studentId}`)).data;
+
+export const unenrollStudentApi = async (courseId, studentId) =>
+  (await api.delete(`/courses/${courseId}/students/${studentId}`)).data;
